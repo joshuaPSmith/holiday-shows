@@ -30,6 +30,7 @@ export default function App() {
       halloween: true,
       thanksgiving: true,
       valentinesDay: true,
+      stPatricksDay: true,
     },
     episodes: initialEpisodeState
   });

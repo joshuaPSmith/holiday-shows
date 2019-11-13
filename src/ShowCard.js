@@ -28,11 +28,11 @@ export default function ShowCard(props) {
         title={props.show.title}
         subheader={'Season ' + props.show.season + ', Episode ' + props.show.episode}
       />
-      <CardMedia
+      {/* <CardMedia
         className={classes.media}
         image="/static/images/cards/paella.jpg"
         title="Paella dish"
-      />
+      /> */}
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           This impressive paella is a perfect party dish and a fun meal to cook together with your
