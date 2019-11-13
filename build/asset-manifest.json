@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.js": "/holiday-shows/static/js/main.a898ecc2.chunk.js",
+    "main.js.map": "/holiday-shows/static/js/main.a898ecc2.chunk.js.map",
+    "runtime-main.js": "/holiday-shows/static/js/runtime-main.6a136f80.js",
+    "runtime-main.js.map": "/holiday-shows/static/js/runtime-main.6a136f80.js.map",
+    "static/js/2.0645fe45.chunk.js": "/holiday-shows/static/js/2.0645fe45.chunk.js",
+    "static/js/2.0645fe45.chunk.js.map": "/holiday-shows/static/js/2.0645fe45.chunk.js.map",
+    "index.html": "/holiday-shows/index.html",
+    "precache-manifest.18148fc90073a463fd54c82844d3c78c.js": "/holiday-shows/precache-manifest.18148fc90073a463fd54c82844d3c78c.js",
+    "service-worker.js": "/holiday-shows/service-worker.js"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6a136f80.js",
+    "static/js/2.0645fe45.chunk.js",
+    "static/js/main.a898ecc2.chunk.js"
+  ]
+}
