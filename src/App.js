@@ -72,12 +72,12 @@ export default function App() {
         <Typography variant="h4" component="h1" gutterBottom>
           The Office
         </Typography>
-        {/* <HolidaySwitches
+        <HolidaySwitches
           switchChange={handleSwitchChange}
           toggleAllChange={handleToggleAllChange}
           toggleAllOn={state.toggleAllOn}
           switchState={state.switchState}
-          holidays={holidays} /> */}
+          holidays={holidays} />
         <MultiSelectComponent id="mtselement" dataSource={Object.keys(holidays).map(key => holidays[key])} popupHeight="250px" popupWidth="250px" placeholder="Pick a show" />
         <ShowList episodes={state.episodes} />
         <Copyright />
