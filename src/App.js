@@ -8,6 +8,7 @@ import ShowList from './ShowList';
 import { holidays } from './api/holidays';
 import HolidaySwitches from './HolidaySwitches';
 import { MultiSelectComponent } from '@syncfusion/ej2-react-dropdowns';
+import { showList } from './api/show-list';
 
 
 function Copyright() {
@@ -78,7 +79,7 @@ export default function App() {
           toggleAllOn={state.toggleAllOn}
           switchState={state.switchState}
           holidays={holidays} />
-        <MultiSelectComponent id="mtselement" dataSource={Object.keys(holidays).map(key => holidays[key])} popupHeight="250px" popupWidth="250px" placeholder="Pick a show" />
+        <MultiSelectComponent id="mtselement" dataSource={Object.keys(showList).map(key => showList[key])} popupHeight="250px" popupWidth="250px" placeholder="Pick a show" />
         <ShowList episodes={state.episodes} />
         <Copyright />
       </Box>
