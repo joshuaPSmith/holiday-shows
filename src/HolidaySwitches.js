@@ -2,6 +2,7 @@ import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import './css/main.css';
 
 export default function HolidaySwitches(props) {
   // const [state, setState] = React.useState({
@@ -25,7 +26,7 @@ export default function HolidaySwitches(props) {
     //   />
     // </FormGroup>
 
-    < FormGroup row >
+    < FormGroup column >
       {
         Object.keys(props.holidays).map((holiday, index) => {
           return (

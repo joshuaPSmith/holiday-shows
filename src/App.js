@@ -9,6 +9,9 @@ import { holidays } from './api/holidays';
 import HolidaySwitches from './HolidaySwitches';
 import { MultiSelectComponent } from '@syncfusion/ej2-react-dropdowns';
 import { showList } from './api/show-list';
+import logo from './assets/img/logo_green_text.png';
+import './css/main.css';
+import Grid from '@material-ui/core/Grid';
 
 
 function Copyright() {
@@ -65,29 +68,35 @@ export default function App() {
   }
 
   return (
-    <Container maxWidth="md">
-      <Box my={1}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Holiday Episode Lists
-        </Typography>
-        <Typography variant="h4" component="h1" gutterBottom>
-          The Office
-        </Typography>
-        <HolidaySwitches
-          switchChange={handleSwitchChange}
-          toggleAllChange={handleToggleAllChange}
-          toggleAllOn={state.toggleAllOn}
-          switchState={state.switchState}
-          holidays={holidays} />
-        <MultiSelectComponent
-          id="mtselement"
-          dataSource={Object.keys(showList).map(key => showList[key])}
-          showSelectAll={true}
-          value={[showList.theOffice]}
-          placeholder="Pick a show" />
-        <ShowList episodes={state.episodes} />
-        <Copyright />
-      </Box>
+    <Container>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <div className="logoDiv">
+            <img className="logo" src={logo} alt="Holiday Show Finder Logo (TV)" />
+          </div>
+          <div className="showList">
+            <MultiSelectComponent
+              id="mtselement"
+              className="showList"
+              dataSource={Object.keys(showList).map(key => showList[key])}
+              showSelectAll={true}
+              value={[showList.theOffice]}
+              placeholder="Pick a show" />
+            </div>
+        </Grid>
+        <Grid item xs={3}>
+          <HolidaySwitches
+            switchChange={handleSwitchChange}
+            toggleAllChange={handleToggleAllChange}
+            toggleAllOn={state.toggleAllOn}
+            switchState={state.switchState}
+            holidays={holidays} />
+        </Grid>
+        <Grid item xs={9}>
+          <ShowList episodes={state.episodes} />
+        </Grid>
+      </Grid>
+      <Copyright />
     </Container>
   );
 }

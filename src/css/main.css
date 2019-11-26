@@ -1,0 +1,24 @@
+/**Header*/
+.logo {
+    width:50%;
+}
+
+.logoDiv {
+    text-align: center;
+}
+
+/**Multiselect*/
+.e-multi-select-wrapper input[type='text'] {
+    font-size: 30px;
+}
+
+.showList {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/**Holiday Switches*/
+.MuiFormControlLabel-root {
+    margin-bottom: 15px;
+}
+
