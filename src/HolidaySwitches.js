@@ -16,6 +16,15 @@ export default function HolidaySwitches(props) {
   };
 
   return (
+    // <FormGroup>
+    //   <FormControlLabel
+    //     control={
+    //       <Switch checked={props.toggleAllOn} onChange={toggleAllChange} />
+    //     }
+    //     label="Toggle All"
+    //   />
+    // </FormGroup>
+
     < FormGroup row >
       {
         Object.keys(props.holidays).map((holiday, index) => {

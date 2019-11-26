@@ -3,5 +3,6 @@ export const holidays = {
   halloween: 'Halloween',
   thanksgiving: 'Thanksgiving',
   valentinesDay: 'Valentines Day',
-  stPatricksDay: "St. Patrick's Day"
+  stPatricksDay: "St. Patrick's Day",
+  newYears: "New Years"
 };
