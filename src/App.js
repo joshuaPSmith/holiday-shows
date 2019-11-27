@@ -7,11 +7,16 @@ import { theOfficeList } from './api/the-office';
 import ShowList from './ShowList';
 import { holidays } from './api/holidays';
 import HolidaySwitches from './HolidaySwitches';
-import { MultiSelectComponent } from '@syncfusion/ej2-react-dropdowns';
+import { Multiselect } from 'multiselect-react-dropdown';
 import { showList } from './api/show-list';
 import logo from './assets/img/logo_green_text.png';
 import './css/main.css';
 import Grid from '@material-ui/core/Grid';
+import { friendsList } from './api/friends';
+import { parksAndRecList } from './api/parks-and-rec';
+import { psychList } from './api/psych';
+import ReactGA from 'react-ga';
+
 
 
 function Copyright() {
@@ -33,6 +38,15 @@ const filterEpisodeList = (episodes, switchState) => {
   })
 }
 
+const showLists = {
+  theOffice: theOfficeList,
+  friends: friendsList,
+  parksAndRec: parksAndRecList,
+  // howIMetYourMother: 'How I Met Your Mother',
+  // community: 'Community',
+  psych: psychList
+};
+
 const initialSwitchState = {
   christmas: true,
   halloween: false,
@@ -41,13 +55,31 @@ const initialSwitchState = {
   stPatricksDay: false,
 };
 
+const initialShowState = Object.keys(showList).reduce((acc, curr) => {
+  acc[curr] = curr === 'theOffice' ? true : false; // default to the office for now
+  return acc;
+}, {});
+
+const getEpisodesFromShowState = (showState) => {
+  let episodeList = [];
+  for (const show in showState) {
+    if (showState[show]) {
+      episodeList = episodeList.concat(showLists[show]);
+    }
+  }
+
+  return episodeList;
+}
 const initialEpisodeState = theOfficeList;
 
 export default function App() {
+  ReactGA.initialize('UA-153509644-1');
+
   const [state, setState] = React.useState({
     switchState: initialSwitchState,
-    toggleAllOn: false,
-    episodes: filterEpisodeList(initialEpisodeState, initialSwitchState)
+    episodes: filterEpisodeList(initialEpisodeState, initialSwitchState),
+    fullEpisodeList: initialEpisodeState,
+    showState: initialShowState
   });
 
   const handleSwitchChange = (checkedValue, name) => {
@@ -56,16 +88,43 @@ export default function App() {
     setState({
       ...state,
       switchState: newSwitchState,
-      episodes: initialEpisodeState.filter(episode => {
+      episodes: state.fullEpisodeList.filter(episode => {
         return episode.holidays.some(holiday => newSwitchState[holiday])
       })
     });
   };
 
-  const handleToggleAllChange = (event) => {
-    // either turn them all on or all off.
-    console.log('Event', event);
+  const onSelectChange = (optionsList, selectedItem) => {
+    const newShowState = { ...state.showState, [selectedItem.id]: true }
+    setShowState(newShowState);
+  };
+  const onShowRemoved = (optionsList, selectedItem) => {
+    const newShowState = { ...state.showState, [selectedItem.id]: false }
+    setShowState(newShowState);
+  };
+
+  const setShowState = (newShowState) => {
+    const newShowList = getEpisodesFromShowState(newShowState);
+    setState({
+      ...state,
+      showState: newShowState,
+      episodes: filterEpisodeList(newShowList, state.switchState),
+      fullEpisodeList: newShowList
+    });
   }
+
+  const dataSource = Object.keys(showList).map(key => { return { id: key, name: showList[key] } })
+
+  const customStyle = {
+    chips: {
+      background: "#19857b"
+    },
+    searchBox: {
+      border: "none",
+      "borderBottom": "1px solid blue",
+      "borderRadius": "0px"
+    }
+  };
 
   return (
     <Container>
@@ -75,20 +134,20 @@ export default function App() {
             <img className="logo" src={logo} alt="Holiday Show Finder Logo (TV)" />
           </div>
           <div className="showList">
-            <MultiSelectComponent
-              id="mtselement"
-              className="showList"
-              dataSource={Object.keys(showList).map(key => showList[key])}
-              showSelectAll={true}
-              value={[showList.theOffice]}
-              placeholder="Pick a show" />
-            </div>
+            <Multiselect
+              options={dataSource}
+              selectedValues={[dataSource[0]]}
+              onSelect={onSelectChange}
+              onRemove={onShowRemoved}
+              placeholder="Pick a show"
+              displayValue="name"
+              style={customStyle}
+            />
+          </div>
         </Grid>
         <Grid item xs={3}>
           <HolidaySwitches
             switchChange={handleSwitchChange}
-            toggleAllChange={handleToggleAllChange}
-            toggleAllOn={state.toggleAllOn}
             switchState={state.switchState}
             holidays={holidays} />
         </Grid>

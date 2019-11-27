@@ -2,9 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
+// import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import { Typography, Chip } from '@material-ui/core';
+import { Chip } from '@material-ui/core';
 import { holidays } from './api/holidays';
 
 const useStyles = makeStyles(theme => ({
@@ -34,10 +34,10 @@ export default function ShowCard(props) {
         title="Paella dish"
       /> */}
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        {/* <Typography variant="body2" color="textSecondary" component="p">
           This impressive paella is a perfect party dish and a fun meal to cook together with your
           guests. Add 1 cup of frozen peas along with the mussels, if you like.
-        </Typography>
+        </Typography> */}
         {props.show.holidays.map((holiday, index) => {
           return <Chip label={holidays[holiday]} key={index} />
         })}
