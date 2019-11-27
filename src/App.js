@@ -9,6 +9,9 @@ import { holidays } from './api/holidays';
 import HolidaySwitches from './HolidaySwitches';
 import { MultiSelectComponent } from '@syncfusion/ej2-react-dropdowns';
 import { showList } from './api/show-list';
+import { friendsList } from './api/friends';
+import { parksAndRecList } from './api/parks-and-rec';
+import { psychList } from './api/psych';
 
 
 function Copyright() {
@@ -30,6 +33,15 @@ const filterEpisodeList = (episodes, switchState) => {
   })
 }
 
+const showLists = {
+  theOffice: theOfficeList,
+  friends: friendsList,
+  parksAndRec: parksAndRecList,
+  // howIMetYourMother: 'How I Met Your Mother',
+  // community: 'Community',
+  psych: psychList
+};
+
 const initialSwitchState = {
   christmas: true,
   halloween: false,
@@ -38,13 +50,28 @@ const initialSwitchState = {
   stPatricksDay: false,
 };
 
+const initialShowState = Object.keys(showList).reduce((acc, curr) => {
+  acc[curr] = curr === 'theOffice' ? true : false; // default to the office for now
+  return acc;
+}, {});
+
+const getEpisodesFromShowState = (showState) => {
+  let episodeList = [];
+  for (const show in showState) {
+    if (showState[show]) {
+      episodeList = episodeList.concat(showLists[show]);
+    }
+  }
+
+  return episodeList;
+}
 const initialEpisodeState = theOfficeList;
 
 export default function App() {
   const [state, setState] = React.useState({
     switchState: initialSwitchState,
-    toggleAllOn: false,
-    episodes: filterEpisodeList(initialEpisodeState, initialSwitchState)
+    episodes: filterEpisodeList(initialEpisodeState, initialSwitchState),
+    showState: initialShowState
   });
 
   const handleSwitchChange = (checkedValue, name) => {
@@ -59,10 +86,22 @@ export default function App() {
     });
   };
 
-  const handleToggleAllChange = (event) => {
-    // either turn them all on or all off.
-    console.log('Event', event);
-  }
+  const onSelectChange = (event) => {
+    const newShowState = { ...state.showState, [event.itemData.value]: true }
+    setState({
+      ...state,
+      showState: newShowState,
+      episodes: filterEpisodeList(getEpisodesFromShowState(newShowState), state.switchState)
+    });
+  };
+  const onShowRemoved = (event) => {
+    const newShowState = { ...state.showState, [event.itemData.value]: false }
+    setState({
+      ...state,
+      showState: newShowState,
+      episodes: filterEpisodeList(getEpisodesFromShowState(newShowState), state.switchState)
+    });
+  };
 
   return (
     <Container maxWidth="md">
@@ -75,16 +114,17 @@ export default function App() {
         </Typography>
         <HolidaySwitches
           switchChange={handleSwitchChange}
-          toggleAllChange={handleToggleAllChange}
-          toggleAllOn={state.toggleAllOn}
           switchState={state.switchState}
           holidays={holidays} />
         <MultiSelectComponent
           id="mtselement"
-          dataSource={Object.keys(showList).map(key => showList[key])}
-          showSelectAll={true}
-          value={[showList.theOffice]}
-          placeholder="Pick a show" />
+          mode="Box"
+          dataSource={Object.keys(showList).map(key => { return { value: key, text: showList[key] } })}
+          fields={{ text: 'text', value: 'value' }}
+          value={['psych']}
+          placeholder="Pick a show"
+          select={onSelectChange}
+          removed={onShowRemoved} />
         <ShowList episodes={state.episodes} />
         <Copyright />
       </Box>
