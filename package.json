@@ -16,6 +16,7 @@
     "multiselect-react-dropdown": "^1.2.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-ga": "^2.7.0",
     "react-scripts": "latest"
   },
   "browserslist": {

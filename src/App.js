@@ -7,12 +7,13 @@ import { theOfficeList } from './api/the-office';
 import ShowList from './ShowList';
 import { holidays } from './api/holidays';
 import HolidaySwitches from './HolidaySwitches';
-// import { MultiSelectComponent } from '@syncfusion/ej2-react-dropdowns';
 import { Multiselect } from 'multiselect-react-dropdown';
 import { showList } from './api/show-list';
 import { friendsList } from './api/friends';
 import { parksAndRecList } from './api/parks-and-rec';
 import { psychList } from './api/psych';
+import ReactGA from 'react-ga';
+
 
 
 function Copyright() {
@@ -69,6 +70,8 @@ const getEpisodesFromShowState = (showState) => {
 const initialEpisodeState = theOfficeList;
 
 export default function App() {
+  ReactGA.initialize('UA-153509644-1');
+
   const [state, setState] = React.useState({
     switchState: initialSwitchState,
     episodes: filterEpisodeList(initialEpisodeState, initialSwitchState),
