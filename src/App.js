@@ -9,7 +9,7 @@ import { holidays } from './api/holidays';
 import HolidaySwitches from './HolidaySwitches';
 import { Multiselect } from 'multiselect-react-dropdown';
 import { showList } from './api/show-list';
-import logo from './assets/img/logo_green_text.png';
+import logo from './assets/img/logo-wide.png';
 import './css/main.css';
 import Grid from '@material-ui/core/Grid';
 import { friendsList } from './api/friends';
@@ -117,39 +117,52 @@ export default function App() {
 
   const customStyle = {
     chips: {
-      background: "#19857b"
+      background: "#F6F6F6",
+      "borderRadius":"10px",
+      "fontSize": "14px",
+      color: "black"
     },
     searchBox: {
       border: "none",
-      "borderBottom": "1px solid blue",
-      "borderRadius": "0px"
+      "borderRadius": "10px",
+      "backgroundColor":"#F6F6F6",
+      padding: "14px"
     }
   };
 
   return (
     <Container>
       <Grid container spacing={3}>
+        <Grid item xs={4}>
+            <div className="logoDiv">
+              <img className="logo" src={logo} alt="Holiday Show Finder" />
+            </div>
+        </Grid>
+        <Grid item xs={8}>
+            <div className="multiselect">
+              <Multiselect
+                options={dataSource}
+                selectedValues={[dataSource[0]]}
+                onSelect={onSelectChange}
+                onRemove={onShowRemoved}
+                placeholder="Add Show"
+                displayValue="name"
+                style={customStyle}
+              />
+            </div>
+        </Grid>
         <Grid item xs={12}>
-          <div className="logoDiv">
-            <img className="logo" src={logo} alt="Holiday Show Finder Logo (TV)" />
-          </div>
-          <div className="showList">
-            <Multiselect
-              options={dataSource}
-              selectedValues={[dataSource[0]]}
-              onSelect={onSelectChange}
-              onRemove={onShowRemoved}
-              placeholder="Pick a show"
-              displayValue="name"
-              style={customStyle}
-            />
-          </div>
+          <hr className="headerSeparator"></hr>
         </Grid>
         <Grid item xs={3}>
-          <HolidaySwitches
-            switchChange={handleSwitchChange}
-            switchState={state.switchState}
-            holidays={holidays} />
+          <Typography variant="h6" className="titleClass">FILTER</Typography>
+          <div className="holidaySwitches">
+            <HolidaySwitches
+              switchChange={handleSwitchChange}
+              switchState={state.switchState}
+              holidays={holidays} />
+            </div>
+            <Typography variant="h6" className="titleClass">SORT</Typography>
         </Grid>
         <Grid item xs={9}>
           <ShowList episodes={state.episodes} />

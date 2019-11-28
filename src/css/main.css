@@ -1,17 +1,33 @@
+.titleClass {
+    font-family: 'Open Sans', sans-serif;
+}
+
 /**Header*/
 .logo {
-    width:50%;
+width: 80%;
 }
 
 .logoDiv {
-    text-align: center;
+    margin-top: 20px;
+}
+
+.headerSeparator {
+    height: 5px;
+    background-color: #F6F6F6;
+    border: none;
 }
 
 /**Multiselect*/
-.e-multi-select-wrapper input[type='text'] {
-    font-size: 30px;
+.multiselect {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 45px;
 }
 
+.searchBox {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/**Show List*/
 .showList {
     margin-top: 50px;
     margin-bottom: 50px;
@@ -22,3 +38,8 @@
     margin-bottom: 15px;
 }
 
+.holidaySwitches {
+    margin-top: 14px;
+    margin-left: 14px;
+    margin-bottom: 30px;
+}
