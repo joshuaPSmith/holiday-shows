@@ -1,7 +1,6 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import { theOfficeList } from './api/the-office';
 import ShowList from './ShowList';
@@ -16,6 +15,9 @@ import { friendsList } from './api/friends';
 import { parksAndRecList } from './api/parks-and-rec';
 import { psychList } from './api/psych';
 import ReactGA from 'react-ga';
+import AppsIcon from '@material-ui/icons/Apps';
+import ViewListIcon from '@material-ui/icons/ViewList';
+import IconButton from '@material-ui/core/IconButton';
 
 function Copyright() {
   return (
@@ -69,6 +71,7 @@ const getEpisodesFromShowState = (showState) => {
   return episodeList;
 }
 const initialEpisodeState = theOfficeList;
+const initialShowLayoutState = 'grid';
 
 export default function App() {
   ReactGA.initialize('UA-153509644-1');
@@ -77,7 +80,8 @@ export default function App() {
     switchState: initialSwitchState,
     episodes: filterEpisodeList(initialEpisodeState, initialSwitchState),
     fullEpisodeList: initialEpisodeState,
-    showState: initialShowState
+    showState: initialShowState,
+    showLayoutState: initialShowLayoutState
   });
 
   const handleSwitchChange = (checkedValue, name) => {
@@ -91,6 +95,15 @@ export default function App() {
       })
     });
   };
+
+  const handleLayoutChange = (layout) => {
+    console.log('handle layout change');
+    const layoutState = layout;
+    setState({
+      ...state,
+      showLayoutState: layoutState
+    });
+  }
 
   const onSelectChange = (optionsList, selectedItem) => {
     const newShowState = { ...state.showState, [selectedItem.id]: true }
@@ -163,7 +176,14 @@ export default function App() {
             <Typography variant="h6" className="titleClass">SORT</Typography>
         </Grid>
         <Grid item xs={9}>
-          <ShowList episodes={state.episodes} />
+          <div className="iconDiv">
+            <AppsIcon onClick={() => handleLayoutChange('grid')} />
+            <ViewListIcon onClick={() => handleLayoutChange('list')} />
+          </div>
+          <ShowList
+            className="showListClass"
+            episodes={state.episodes}
+            layout={state.showLayoutState} />
         </Grid>
       </Grid>
       <Copyright />

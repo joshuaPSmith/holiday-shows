@@ -28,9 +28,13 @@ width: 80%;
 }
 
 /**Show List*/
-.showList {
-    margin-top: 50px;
-    margin-bottom: 50px;
+.iconDiv {
+    margin-bottom: 20px;
+    color: #E21B54;
+}
+
+.iconDiv:hover {
+    cursor: pointer;
 }
 
 /**Holiday Switches*/
