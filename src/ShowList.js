@@ -27,9 +27,7 @@ export default function ShowList(props) {
     return (
       <div className={classes.root}>
         <Grid container spacing={2}>
-          {props.episodes.map((value, index) => {
-            return <Grid item xs={12} key={index}><ShowDetails show={value} /></Grid>
-          })}
+          <Grid item xs={12}><ShowDetails episodes={props.episodes} /></Grid>
         </Grid>
       </div>
     );
