@@ -17,8 +17,6 @@ import { parksAndRecList } from './api/parks-and-rec';
 import { psychList } from './api/psych';
 import ReactGA from 'react-ga';
 
-
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">

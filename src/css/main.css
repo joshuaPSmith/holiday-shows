@@ -43,3 +43,16 @@ width: 80%;
     margin-left: 14px;
     margin-bottom: 30px;
 }
+
+/**Cards*/
+.MuiCardHeader-title {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.MuiCardHeader-subheader {
+    font-family: 'Montserrat', sans-serif!important;
+}
+
+.MuiChip-label {
+    font-family: 'Open Sans', sans-serif;
+}
