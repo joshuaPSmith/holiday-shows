@@ -3,6 +3,6 @@ export const showList = {
   friends: 'Friends',
   parksAndRec: 'Parks and Rec',
   // howIMetYourMother: 'How I Met Your Mother',
-  // community: 'Community',
+  community: 'Community',
   psych: 'Psych'
 }

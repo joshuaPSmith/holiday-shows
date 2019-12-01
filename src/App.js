@@ -14,6 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import { friendsList } from './api/friends';
 import { parksAndRecList } from './api/parks-and-rec';
 import { psychList } from './api/psych';
+import { communityList } from './api/community';
 import ReactGA from 'react-ga';
 import AppsIcon from '@material-ui/icons/Apps';
 // import ViewListIcon from '@material-ui/icons/ViewList';
@@ -43,7 +44,7 @@ const showLists = {
   friends: friendsList,
   parksAndRec: parksAndRecList,
   // howIMetYourMother: 'How I Met Your Mother',
-  // community: 'Community',
+  community: communityList,
   psych: psychList
 };
 
