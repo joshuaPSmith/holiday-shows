@@ -58,7 +58,7 @@ export default function ShowCard(props) {
       />
       <CardContent>
         {props.show.holidays.map((holiday, index) => {
-          return <Chip className={classes.chips} style={{ background: color }} label={holidays[holiday]} key={index} />
+          return <Chip className={classes.chips} style={{ background: holidays[holiday].color }} label={holidays[holiday].name} key={index} />
         })}
       </CardContent>
     </Card>

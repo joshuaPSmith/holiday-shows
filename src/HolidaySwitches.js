@@ -45,7 +45,7 @@ export default function HolidaySwitches(props) {
               control={
                 <PinkCheckbox checked={props.switchState[holiday]} onChange={handleChange(holiday)} />
               }
-              label={props.holidays[holiday]}
+              label={props.holidays[holiday].name}
             />
           )
         })
