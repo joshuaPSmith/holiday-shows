@@ -37,7 +37,7 @@ export default function HolidaySwitches(props) {
     //   />
     // </FormGroup>
 
-    < FormGroup column >
+    <FormGroup>
       {
         Object.keys(props.holidays).map((holiday, index) => {
           return (

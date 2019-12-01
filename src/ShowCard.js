@@ -32,6 +32,10 @@ const cardStyles = makeStyles(theme => ({
   }
 }));
 
+const returnImageSting = (show) => {
+  return show.thumbnail ? require(`${show.thumbnail}`) : null;
+}
+
 export default function ShowCard(props) {
   const classes = cardStyles();
   const color = props.show.color;
@@ -40,7 +44,7 @@ export default function ShowCard(props) {
 
       {<CardMedia
         className={classes.media}
-        image={require(`${props.show.thumbnail}`)}
+        image={returnImageSting(props.show)}
         title={props.show.title}
       />}
       <div id="imageOverlay" className={classes.imageOverlay}>

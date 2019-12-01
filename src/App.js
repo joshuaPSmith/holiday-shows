@@ -16,8 +16,8 @@ import { parksAndRecList } from './api/parks-and-rec';
 import { psychList } from './api/psych';
 import ReactGA from 'react-ga';
 import AppsIcon from '@material-ui/icons/Apps';
-import ViewListIcon from '@material-ui/icons/ViewList';
-import IconButton from '@material-ui/core/IconButton';
+// import ViewListIcon from '@material-ui/icons/ViewList';
+// import IconButton from '@material-ui/core/IconButton';
 
 function Copyright() {
   return (
@@ -129,14 +129,14 @@ export default function App() {
   const customStyle = {
     chips: {
       background: "#F6F6F6",
-      "borderRadius":"10px",
+      "borderRadius": "10px",
       "fontSize": "14px",
       color: "black"
     },
     searchBox: {
       border: "none",
       "borderRadius": "10px",
-      "backgroundColor":"#F6F6F6",
+      "backgroundColor": "#F6F6F6",
       padding: "14px"
     }
   };
@@ -145,22 +145,22 @@ export default function App() {
     <Container>
       <Grid container spacing={3}>
         <Grid item xs={4}>
-            <div className="logoDiv">
-              <img className="logo" src={logo} alt="Holiday Show Finder" />
-            </div>
+          <div className="logoDiv">
+            <img className="logo" src={logo} alt="Holiday Show Finder" />
+          </div>
         </Grid>
         <Grid item xs={8}>
-            <div className="multiselect">
-              <Multiselect
-                options={dataSource}
-                selectedValues={[dataSource[0]]}
-                onSelect={onSelectChange}
-                onRemove={onShowRemoved}
-                placeholder="Add Show"
-                displayValue="name"
-                style={customStyle}
-              />
-            </div>
+          <div className="multiselect">
+            <Multiselect
+              options={dataSource}
+              selectedValues={[dataSource[0]]}
+              onSelect={onSelectChange}
+              onRemove={onShowRemoved}
+              placeholder="Add Show"
+              displayValue="name"
+              style={customStyle}
+            />
+          </div>
         </Grid>
         <Grid item xs={12}>
           <hr className="headerSeparator"></hr>
@@ -172,14 +172,14 @@ export default function App() {
               switchChange={handleSwitchChange}
               switchState={state.switchState}
               holidays={holidays} />
-            </div>
-            <Typography variant="h6" className="titleClass">SORT</Typography>
+          </div>
+          {/* <Typography variant="h6" className="titleClass">SORT</Typography> */}
         </Grid>
         <Grid item xs={9}>
-          <div className="iconDiv">
+          {/* <div className="iconDiv">
             <AppsIcon onClick={() => handleLayoutChange('grid')} />
             <ViewListIcon onClick={() => handleLayoutChange('list')} />
-          </div>
+          </div> */}
           <ShowList
             className="showListClass"
             episodes={state.episodes}
