@@ -29,51 +29,32 @@ const cardStyles = makeStyles(theme => ({
     borderTopRightRadius: '15px',
     borderBottomRightRadius: '15px',
     paddingRight: '10px'
- }
-}));
-
-function getImage(title) {
-  switch (title) {
-    case 'Christmas Party': return require('./assets/img/shows/the-office/christmas-party.jpg');
-    case 'A Benihana Christmas': return require('./assets/img/shows/the-office/benihana-christmas.jpg');
-    case 'Moroccan Christmas': return require('./assets/img/shows/the-office/moroccan-christmas.jpg');
-    case 'Halloween': return require('./assets/img/shows/the-office/halloween.jpg');
-    case 'Valentine\'s Day': return require('./assets/img/shows/the-office/valentines-day.jpg');
-    case 'Blood Drive': return require('./assets/img/shows/the-office/blood-drive.jpg');
-    case 'Secret Santa': return require('./assets/img/shows/the-office/secret-santa.jpg');
-    case 'St. Patrick\'s Day': return require('./assets/img/shows/the-office/st-patricks-day.jpg');
-    case 'Costume Contest': return require('./assets/img/shows/the-office/costume-contest.jpg');
-    case 'Classy Christmas': return require('./assets/img/shows/the-office/classy-christmas.jpg');
-    case 'PDA': return require('./assets/img/shows/the-office/pda.jpg');
-    case 'Christmas Wishes': return require('./assets/img/shows/the-office/christmas-wishes.jpg');
-    case 'Dwight Christmas': return require('./assets/img/shows/the-office/dwight-christmas.jpg');
-    case 'Couples Discount': return require('./assets/img/shows/the-office/couples-discount.jpg');
   }
-}
+}));
 
 export default function ShowCard(props) {
   const classes = cardStyles();
   const color = props.show.color;
   return (
     <Card className={classes.card}>
-        
+
       {<CardMedia
         className={classes.media}
-        image={getImage(props.show.title)}
+        image={require(`${props.show.thumbnail}`)}
         title={props.show.title}
       />}
       <div id="imageOverlay" className={classes.imageOverlay}>
-          {props.show.show}
-        </div>
+        {props.show.show}
+      </div>
       <CardHeader
         className={classes.header}
-        titleTypographyProps={{variant:'h6'}}
+        titleTypographyProps={{ variant: 'h6' }}
         title={props.show.title}
         subheader={'Season ' + props.show.season + ', Episode ' + props.show.episode}
       />
       <CardContent>
         {props.show.holidays.map((holiday, index) => {
-          return <Chip className={classes.chips} style={{background : color}} label={holidays[holiday]} key={index} />
+          return <Chip className={classes.chips} style={{ background: color }} label={holidays[holiday]} key={index} />
         })}
       </CardContent>
     </Card>
