@@ -65,7 +65,7 @@ export const theOfficeList = [
     title: "Secret Santa",
     season: '6',
     episode: '13',
-    thumbnail: './assets/img/shows/the-office/secret-santa.jp',
+    thumbnail: './assets/img/shows/the-office/secret-santa.jpg',
     rating: 4,
     holidays: ['christmas'],
     color: '#0F865C'
