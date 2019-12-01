@@ -7,8 +7,7 @@ export const theOfficeList = [
     episode: '5',
     thumbnail: './assets/img/shows/the-office/halloween.jpg',
     rating: 4,
-    holidays: ['halloween'],
-    color: '#EE8C2D',
+    holidays: ['halloween']
   },
   {
     title: 'Christmas Party',
@@ -16,8 +15,7 @@ export const theOfficeList = [
     episode: '10',
     thumbnail: './assets/img/shows/the-office/christmas-party.jpg',
     rating: 4,
-    holidays: ['christmas'],
-    color: '#0F865C'
+    holidays: ['christmas']
   },
   {
     title: "Valentine's Day",
@@ -25,8 +23,7 @@ export const theOfficeList = [
     episode: '16',
     thumbnail: './assets/img/shows/the-office/valentines-day.jpg',
     rating: 4,
-    holidays: ['valentinesDay'],
-    color: '#C943CA'
+    holidays: ['valentinesDay']
   },
   {
     title: "A Benihana Christmas",
@@ -34,8 +31,7 @@ export const theOfficeList = [
     episode: '10/11',
     thumbnail: './assets/img/shows/the-office/benihana-christmas.jpg',
     rating: 4,
-    holidays: ['christmas'],
-    color: '#0F865C'
+    holidays: ['christmas']
   },
   {
     title: "Moroccan Christmas",

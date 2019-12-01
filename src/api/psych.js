@@ -1,3 +1,5 @@
+import { showList } from "./show-list";
+
 export const psychList = [
   {
     title: 'He Loves Me, He Loves...',
@@ -159,6 +161,8 @@ export const psychList = [
     rating: 4,
     holidays: ['valentinesDay']
   }
-]
+].map(episode => {
+  return { ...episode, show: showList['psych'] }
+});
 
 // https://www.reddit.com/r/psych/comments/8athzv/complete_holiday_list/

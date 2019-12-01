@@ -1,9 +1,11 @@
+import { showList } from "./show-list";
+
 export const parksAndRecList = [
   {
     title: 'Greg Pikitis',
     season: '2',
     episode: '7',
-    thumbnail: '',
+    thumbnail: './assets/img/shows/parks-and-rec/greg-pikitis.png',
     rating: 4,
     holidays: ['halloween']
   },
@@ -11,7 +13,7 @@ export const parksAndRecList = [
     title: 'Christmas Scandal',
     season: '2',
     episode: '12',
-    thumbnail: '',
+    thumbnail: './assets/img/shows/parks-and-rec/christmas-scandal.jpg',
     rating: 4,
     holidays: ['christmas']
   },
@@ -19,7 +21,7 @@ export const parksAndRecList = [
     title: "Galentine's Day",
     season: '2',
     episode: '16',
-    thumbnail: '',
+    thumbnail: './assets/img/shows/parks-and-rec/galentines-day.jpg',
     rating: 4,
     holidays: ['valentinesDay']
   },
@@ -27,8 +29,10 @@ export const parksAndRecList = [
     title: 'Halloween Surprise',
     season: '5',
     episode: '5',
-    thumbnail: '',
+    thumbnail: './assets/img/shows/parks-and-rec/halloween-surprise.png',
     rating: 4,
     holidays: ['halloween']
   }
-]
+].map(episode => {
+  return { ...episode, show: showList['parksAndRec'] }
+});

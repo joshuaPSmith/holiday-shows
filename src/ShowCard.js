@@ -21,7 +21,7 @@ const cardStyles = makeStyles(theme => ({
     color: 'white',
     fontFamily: "Montserrat', sans-serif"
   },
-  imageOverlay: {
+  showNameOverlay: {
     position: 'absolute',
     top: '8px',
     color: '#7D7975',
@@ -29,10 +29,19 @@ const cardStyles = makeStyles(theme => ({
     borderTopRightRadius: '15px',
     borderBottomRightRadius: '15px',
     paddingRight: '10px'
+  },
+  attributionText: {
+    position: 'absolute',
+    top: '145px',
+    color: '#F6F6F6',
+    right: '0',
+    paddingRight: '10px',
+    fontSize: '10px',
+    fontStyle: 'italic'
   }
 }));
 
-const returnImageSting = (show) => {
+const returnImageString = (show) => {
   return show.thumbnail ? require(`${show.thumbnail}`) : null;
 }
 
@@ -44,10 +53,13 @@ export default function ShowCard(props) {
 
       {<CardMedia
         className={classes.media}
-        image={returnImageSting(props.show)}
+        image={returnImageString(props.show)}
         title={props.show.title}
       />}
-      <div id="imageOverlay" className={classes.imageOverlay}>
+      <div id="showNameOverlay" className={classes.showNameOverlay}>
+        {props.show.show}
+      </div>
+      <div id="attributionText" className={classes.attributionText}>
         {props.show.show}
       </div>
       <CardHeader

@@ -9,7 +9,7 @@ export const holidays = {
   },
   thanksgiving: {
     name: 'Thanksgiving',
-    color: 'brown'
+    color: '#EEC402'
   },
   valentinesDay: {
     name: 'Valentines Day',
@@ -21,6 +21,6 @@ export const holidays = {
   },
   newYears: {
     name: "New Years",
-    color: 'blue'
+    color: '#5CC2C2'
   }
 };
