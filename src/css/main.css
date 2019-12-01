@@ -1,0 +1,62 @@
+.titleClass {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/**Header*/
+.logo {
+width: 80%;
+}
+
+.logoDiv {
+    margin-top: 20px;
+}
+
+.headerSeparator {
+    height: 5px;
+    background-color: #F6F6F6;
+    border: none;
+}
+
+/**Multiselect*/
+.multiselect {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 45px;
+}
+
+.searchBox {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/**Show List*/
+.iconDiv {
+    margin-bottom: 20px;
+    color: #E21B54;
+}
+
+.iconDiv:hover {
+    cursor: pointer;
+}
+
+/**Holiday Switches*/
+.MuiFormControlLabel-root {
+    margin-bottom: 15px;
+}
+
+.holidaySwitches {
+    margin-top: 14px;
+    margin-left: 14px;
+    margin-bottom: 30px;
+}
+
+/**Cards*/
+.MuiCardHeader-title {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.MuiCardHeader-subheader {
+    font-family: 'Montserrat', sans-serif!important;
+}
+
+.MuiChip-label {
+    font-family: 'Open Sans', sans-serif;
+}
