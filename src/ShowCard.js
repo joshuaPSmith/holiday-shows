@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { Chip } from '@material-ui/core';
 import { holidays } from './api/holidays';
 import './css/main.css';
+import { showList } from './api/show-list';
 
 const cardStyles = makeStyles(theme => ({
   card: {
@@ -21,7 +22,7 @@ const cardStyles = makeStyles(theme => ({
     color: 'white',
     fontFamily: "Montserrat', sans-serif"
   },
-  imageOverlay: {
+  showNameOverlay: {
     position: 'absolute',
     top: '8px',
     color: '#7D7975',
@@ -29,10 +30,19 @@ const cardStyles = makeStyles(theme => ({
     borderTopRightRadius: '15px',
     borderBottomRightRadius: '15px',
     paddingRight: '10px'
+  },
+  attributionText: {
+    position: 'absolute',
+    top: '145px',
+    color: '#F6F6F6',
+    right: '0',
+    paddingRight: '10px',
+    fontSize: '10px',
+    fontStyle: 'italic'
   }
 }));
 
-const returnImageSting = (show) => {
+const returnImageString = (show) => {
   return show.thumbnail ? require(`${show.thumbnail}`) : null;
 }
 
@@ -44,11 +54,14 @@ export default function ShowCard(props) {
 
       {<CardMedia
         className={classes.media}
-        image={returnImageSting(props.show)}
+        image={returnImageString(props.show)}
         title={props.show.title}
       />}
-      <div id="imageOverlay" className={classes.imageOverlay}>
-        {props.show.show}
+      <div id="showNameOverlay" className={classes.showNameOverlay}>
+        {showList[props.show.show].name}
+      </div>
+      <div id="attributionText" className={classes.attributionText}>
+        {showList[props.show.show].attribution}
       </div>
       <CardHeader
         className={classes.header}

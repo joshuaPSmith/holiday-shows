@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
@@ -14,11 +14,13 @@ import Grid from '@material-ui/core/Grid';
 import { friendsList } from './api/friends';
 import { parksAndRecList } from './api/parks-and-rec';
 import { psychList } from './api/psych';
+import { communityList } from './api/community';
 import ReactGA from 'react-ga';
 import {Helmet} from 'react-helmet'
 import AppsIcon from '@material-ui/icons/Apps';
 // import ViewListIcon from '@material-ui/icons/ViewList';
 // import IconButton from '@material-ui/core/IconButton';
+import noResultsFoundImg from './assets/img/NoResultsLiteStatic.png'
 
 function Copyright() {
   return (
@@ -44,7 +46,7 @@ const showLists = {
   friends: friendsList,
   parksAndRec: parksAndRecList,
   // howIMetYourMother: 'How I Met Your Mother',
-  // community: 'Community',
+  community: communityList,
   psych: psychList
 };
 
@@ -75,7 +77,12 @@ const initialEpisodeState = theOfficeList;
 const initialShowLayoutState = 'grid';
 
 export default function App() {
-  ReactGA.initialize('UA-153509644-1');
+
+  useEffect(() => {
+    ReactGA.initialize('UA-153509644-1');
+    ReactGA.pageview('/homepage');
+  }, []);
+
 
   const [state, setState] = React.useState({
     switchState: initialSwitchState,
@@ -95,6 +102,12 @@ export default function App() {
         return episode.holidays.some(holiday => newSwitchState[holiday])
       })
     });
+
+    ReactGA.event({
+      category: 'User',
+      action: 'Switched Holiday',
+      label: name
+    });
   };
 
   const handleLayoutChange = (layout) => {
@@ -109,10 +122,22 @@ export default function App() {
   const onSelectChange = (optionsList, selectedItem) => {
     const newShowState = { ...state.showState, [selectedItem.id]: true }
     setShowState(newShowState);
+    ReactGA.event({
+      category: 'User',
+      action: 'Added Show',
+      label: selectedItem.name,
+      value: optionsList
+    });
   };
   const onShowRemoved = (optionsList, selectedItem) => {
     const newShowState = { ...state.showState, [selectedItem.id]: false }
     setShowState(newShowState);
+    ReactGA.event({
+      category: 'User',
+      action: 'Removed Show',
+      label: selectedItem.name,
+      value: optionsList
+    });
   };
 
   const setShowState = (newShowState) => {
@@ -125,7 +150,26 @@ export default function App() {
     });
   }
 
-  const dataSource = Object.keys(showList).map(key => { return { id: key, name: showList[key] } })
+  const listResults = (episodes, showLayoutState) => {
+    if (episodes.length > 0) {
+      return (
+        <ShowList
+          className="showListClass"
+          episodes={episodes}
+          layout={showLayoutState} />
+      )
+    } else {
+      return (
+        <div className="noResultsFound">
+          <img src={noResultsFoundImg} alt="No Results Found" />
+          <div className="noResultsTitle">No results found.</div>
+          <div className="noResultsSubtitle">Try selecting a holiday or adding a show.</div>
+        </div>
+      );
+    }
+  }
+
+  const dataSource = Object.keys(showList).map(key => { return { id: key, name: showList[key].name } })
 
   const customStyle = {
     chips: {
@@ -153,12 +197,12 @@ export default function App() {
   </Helmet>
       </div>
       <Grid container spacing={3}>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <div className="logoDiv">
             <img className="logo" src={logo} alt="Holiday Show Finder" />
           </div>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={8}>
           <div className="multiselect">
             <Multiselect
               options={dataSource}
@@ -174,7 +218,7 @@ export default function App() {
         <Grid item xs={12}>
           <hr className="headerSeparator"></hr>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <Typography variant="h6" className="titleClass">FILTER</Typography>
           <div className="holidaySwitches">
             <HolidaySwitches
@@ -184,15 +228,16 @@ export default function App() {
           </div>
           {/* <Typography variant="h6" className="titleClass">SORT</Typography> */}
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12} md={9}>
           {/* <div className="iconDiv">
             <AppsIcon onClick={() => handleLayoutChange('grid')} />
             <ViewListIcon onClick={() => handleLayoutChange('list')} />
           </div> */}
-          <ShowList
+          {/* <ShowList
             className="showListClass"
             episodes={state.episodes}
-            layout={state.showLayoutState} />
+            layout={state.showLayoutState} /> */}
+          {listResults(state.episodes, state.showLayoutState)}
         </Grid>
       </Grid>
       <Copyright />
