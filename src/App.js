@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
@@ -16,7 +16,6 @@ import { parksAndRecList } from './api/parks-and-rec';
 import { psychList } from './api/psych';
 import { communityList } from './api/community';
 import ReactGA from 'react-ga';
-import AppsIcon from '@material-ui/icons/Apps';
 // import ViewListIcon from '@material-ui/icons/ViewList';
 // import IconButton from '@material-ui/core/IconButton';
 import noResultsFoundImg from './assets/img/NoResultsLiteStatic.png'
@@ -77,7 +76,11 @@ const initialShowLayoutState = 'grid';
 
 export default function App() {
 
-  ReactGA.initialize('UA-153509644-1');
+  useEffect(() => {
+    ReactGA.initialize('UA-153509644-1');
+    ReactGA.pageview('/homepage');
+  }, []);
+
 
   const [state, setState] = React.useState({
     switchState: initialSwitchState,
@@ -97,6 +100,12 @@ export default function App() {
         return episode.holidays.some(holiday => newSwitchState[holiday])
       })
     });
+
+    ReactGA.event({
+      category: 'User',
+      action: 'Switched Holiday',
+      label: name
+    });
   };
 
   const handleLayoutChange = (layout) => {
@@ -111,10 +120,22 @@ export default function App() {
   const onSelectChange = (optionsList, selectedItem) => {
     const newShowState = { ...state.showState, [selectedItem.id]: true }
     setShowState(newShowState);
+    ReactGA.event({
+      category: 'User',
+      action: 'Added Show',
+      label: selectedItem.name,
+      value: optionsList
+    });
   };
   const onShowRemoved = (optionsList, selectedItem) => {
     const newShowState = { ...state.showState, [selectedItem.id]: false }
     setShowState(newShowState);
+    ReactGA.event({
+      category: 'User',
+      action: 'Removed Show',
+      label: selectedItem.name,
+      value: optionsList
+    });
   };
 
   const setShowState = (newShowState) => {
@@ -146,7 +167,7 @@ export default function App() {
     }
   }
 
-  const dataSource = Object.keys(showList).map(key => { return { id: key, name: showList[key] } })
+  const dataSource = Object.keys(showList).map(key => { return { id: key, name: showList[key].name } })
 
   const customStyle = {
     chips: {
