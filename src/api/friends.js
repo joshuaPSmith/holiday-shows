@@ -1,5 +1,3 @@
-import { showList } from "./show-list";
-
 export const friendsList = [
   {
     title: 'The One Where Underdog Gets Away',
@@ -146,5 +144,5 @@ export const friendsList = [
     holidays: ['thanksgiving']
   },
 ].map(episode => {
-  return { ...episode, show: showList['friends'] }
+  return { ...episode, show: 'friends' }
 });

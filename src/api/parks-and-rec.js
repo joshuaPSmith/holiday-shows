@@ -1,5 +1,3 @@
-import { showList } from "./show-list";
-
 export const parksAndRecList = [
   {
     title: 'Greg Pikitis',
@@ -34,5 +32,5 @@ export const parksAndRecList = [
     holidays: ['halloween']
   }
 ].map(episode => {
-  return { ...episode, show: showList['parksAndRec'] }
+  return { ...episode, show: 'parksAndRec' }
 });

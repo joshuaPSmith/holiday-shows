@@ -1,5 +1,3 @@
-import { showList } from "./show-list";
-
 export const communityList = [
   {
     title: 'Introduction to Statistics',
@@ -88,9 +86,9 @@ export const communityList = [
     thumbnail: './assets/img/shows/community/intro-to-knots.jpg',
     rating: 4,
     holidays: ['christmas']
-  }  
+  }
 ].map(episode => {
-  return { ...episode, show: showList['community'] }
+  return { ...episode, show: 'community' }
 });
 // https://www.tvovermind.com/community-holiday-episode-best/
 // https://www.ranker.com/list/best-community-holiday-themed-episodes/ranker-tv

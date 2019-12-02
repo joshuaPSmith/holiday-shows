@@ -164,7 +164,7 @@ export default function App() {
     }
   }
 
-  const dataSource = Object.keys(showList).map(key => { return { id: key, name: showList[key] } })
+  const dataSource = Object.keys(showList).map(key => { return { id: key, name: showList[key].name } })
 
   const customStyle = {
     chips: {

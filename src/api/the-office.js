@@ -1,5 +1,3 @@
-import { showList } from "./show-list";
-
 export const theOfficeList = [
   {
     title: 'Halloween',
@@ -114,5 +112,5 @@ export const theOfficeList = [
     holidays: ['valentinesDay']
   }
 ].map(episode => {
-  return { ...episode, show: showList['theOffice'] }
+  return { ...episode, show: 'theOffice' }
 });

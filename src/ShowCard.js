@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { Chip } from '@material-ui/core';
 import { holidays } from './api/holidays';
 import './css/main.css';
+import { showList } from './api/show-list';
 
 const cardStyles = makeStyles(theme => ({
   card: {
@@ -57,10 +58,10 @@ export default function ShowCard(props) {
         title={props.show.title}
       />}
       <div id="showNameOverlay" className={classes.showNameOverlay}>
-        {props.show.show}
+        {showList[props.show.show].name}
       </div>
       <div id="attributionText" className={classes.attributionText}>
-        {props.show.show}
+        {showList[props.show.show].attribution}
       </div>
       <CardHeader
         className={classes.header}
