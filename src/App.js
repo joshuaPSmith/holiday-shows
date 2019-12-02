@@ -158,10 +158,10 @@ export default function App() {
       )
     } else {
       return (
-        <div class="noResultsFound">
-          <img src={noResultsFoundImg} alt="No Results Found" /> 
-          <div class="noResultsTitle">No results found.</div>
-          <div class="noResultsSubtitle">Try selecting a holiday or adding a show.</div>
+        <div className="noResultsFound">
+          <img src={noResultsFoundImg} alt="No Results Found" />
+          <div className="noResultsTitle">No results found.</div>
+          <div className="noResultsSubtitle">Try selecting a holiday or adding a show.</div>
         </div>
       );
     }
