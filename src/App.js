@@ -16,6 +16,8 @@ import { parksAndRecList } from './api/parks-and-rec';
 import { psychList } from './api/psych';
 import { communityList } from './api/community';
 import ReactGA from 'react-ga';
+import {Helmet} from 'react-helmet'
+import AppsIcon from '@material-ui/icons/Apps';
 // import ViewListIcon from '@material-ui/icons/ViewList';
 // import IconButton from '@material-ui/core/IconButton';
 import noResultsFoundImg from './assets/img/NoResultsLiteStatic.png'
@@ -186,6 +188,14 @@ export default function App() {
 
   return (
     <Container>
+      <div>
+      <Helmet>
+    <title>Holiday Show Finder - The easiest way to find holiday episodes of your favorite shows!</title>
+    <meta name="description" content="Use our app to find holiday episodes of The Office, Friends, 
+    Psych, Community, and Parks and recreation! This app will make it easy to get in the holiday season 
+    by showing you the right episodes for the holiday!" />
+  </Helmet>
+      </div>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <div className="logoDiv">
