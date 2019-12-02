@@ -19,6 +19,7 @@ import ReactGA from 'react-ga';
 import AppsIcon from '@material-ui/icons/Apps';
 // import ViewListIcon from '@material-ui/icons/ViewList';
 // import IconButton from '@material-ui/core/IconButton';
+import noResultsFoundImg from './assets/img/NoResultsLiteStatic.png'
 
 function Copyright() {
   return (
@@ -136,8 +137,10 @@ export default function App() {
       )
     } else {
       return (
-        <div>
-          Nothing :(
+        <div class="noResultsFound">
+          <img src={noResultsFoundImg} alt="No Results Found" /> 
+          <div class="noResultsTitle">No results found.</div>
+          <div class="noResultsSubtitle">Try selecting a holiday or adding a show.</div>
         </div>
       );
     }
@@ -163,12 +166,12 @@ export default function App() {
   return (
     <Container>
       <Grid container spacing={3}>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <div className="logoDiv">
             <img className="logo" src={logo} alt="Holiday Show Finder" />
           </div>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={8}>
           <div className="multiselect">
             <Multiselect
               options={dataSource}
@@ -184,7 +187,7 @@ export default function App() {
         <Grid item xs={12}>
           <hr className="headerSeparator"></hr>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <Typography variant="h6" className="titleClass">FILTER</Typography>
           <div className="holidaySwitches">
             <HolidaySwitches
@@ -194,7 +197,7 @@ export default function App() {
           </div>
           {/* <Typography variant="h6" className="titleClass">SORT</Typography> */}
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12} md={9}>
           {/* <div className="iconDiv">
             <AppsIcon onClick={() => handleLayoutChange('grid')} />
             <ViewListIcon onClick={() => handleLayoutChange('list')} />

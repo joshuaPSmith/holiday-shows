@@ -4,7 +4,7 @@
 
 /**Header*/
 .logo {
-width: 80%;
+    width: 80%;
 }
 
 .logoDiv {
@@ -37,6 +37,27 @@ width: 80%;
     cursor: pointer;
 }
 
+.noResultsFound {
+    margin-left: -240px;
+    text-align: center;
+    color: gray;
+    padding-top: 100px;
+}
+
+.noResultsTitle {
+    font-size: 40px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.noResultsSubtitle {
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.noResultsFound img {
+    width: 20%;
+}
+
 /**Holiday Switches*/
 .MuiFormControlLabel-root {
     margin-bottom: 15px;
@@ -60,3 +81,32 @@ width: 80%;
 .MuiChip-label {
     font-family: 'Open Sans', sans-serif;
 }
+
+/**mobile styles*/
+@media only screen and (max-width: 900px) {
+    .logoDiv {
+        text-align: center;
+    }
+
+    .multiselect {
+        font-family: 'Montserrat', sans-serif;
+        margin-top: 0px!important;
+    }
+
+    .noResultsFound {
+        margin-left: 0px;
+        text-align: center;
+        color: gray;
+        padding-top: 0px;
+        margin-bottom: 20px;
+        margin-top: -40px;
+    }
+
+    .noResultsTitle {
+        font-size: 30px;
+    }
+    
+    .noResultsSubtitle {
+        font-size: 15px;
+    }
+  }
