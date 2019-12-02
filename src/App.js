@@ -75,6 +75,7 @@ const initialEpisodeState = theOfficeList;
 const initialShowLayoutState = 'grid';
 
 export default function App() {
+
   ReactGA.initialize('UA-153509644-1');
 
   const [state, setState] = React.useState({
@@ -123,6 +124,23 @@ export default function App() {
       episodes: filterEpisodeList(newShowList, state.switchState),
       fullEpisodeList: newShowList
     });
+  }
+
+  const listResults = (episodes, showLayoutState) => {
+    if (episodes.length > 0) {
+      return (
+        <ShowList
+          className="showListClass"
+          episodes={episodes}
+          layout={showLayoutState} />
+      )
+    } else {
+      return (
+        <div>
+          Nothing :(
+        </div>
+      );
+    }
   }
 
   const dataSource = Object.keys(showList).map(key => { return { id: key, name: showList[key] } })
@@ -181,10 +199,11 @@ export default function App() {
             <AppsIcon onClick={() => handleLayoutChange('grid')} />
             <ViewListIcon onClick={() => handleLayoutChange('list')} />
           </div> */}
-          <ShowList
+          {/* <ShowList
             className="showListClass"
             episodes={state.episodes}
-            layout={state.showLayoutState} />
+            layout={state.showLayoutState} /> */}
+          {listResults(state.episodes, state.showLayoutState)}
         </Grid>
       </Grid>
       <Copyright />
