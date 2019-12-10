@@ -1,19 +1,19 @@
 export const holidays = {
   christmas: {
-    name: 'Christmas',
-    color: '#0F865C'
+    name: "Christmas",
+    color: "#0F865C"
   },
   halloween: {
-    name: 'Halloween',
-    color: '#EE8C2D'
+    name: "Halloween",
+    color: "#EE8C2D"
   },
   thanksgiving: {
-    name: 'Thanksgiving',
-    color: '#EEC402'
+    name: "Thanksgiving",
+    color: "#EEC402"
   },
   valentinesDay: {
-    name: 'Valentines Day',
-    color: '#C943CA'
+    name: "Valentines Day",
+    color: "#C943CA"
   },
   stPatricksDay: {
     name: "St. Patrick's Day",
@@ -21,6 +21,14 @@ export const holidays = {
   },
   newYears: {
     name: "New Years",
-    color: '#5CC2C2'
+    color: "#5CC2C2"
   }
+};
+
+export const initialSwitchState = {
+  christmas: true,
+  halloween: false,
+  thanksgiving: false,
+  valentinesDay: false,
+  stPatricksDay: false
 };
