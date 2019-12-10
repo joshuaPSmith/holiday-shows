@@ -6,14 +6,10 @@ import ShowList from "./ShowList";
 import { holidays } from "./api/holidays";
 import HolidaySwitches from "./HolidaySwitches";
 import { Multiselect } from "multiselect-react-dropdown";
-import { showList } from "./api/show-list";
+import { showList, showListPaths } from "./api/show-list";
 import logo from "./assets/img/logo-wide.png";
 import "./css/main.css";
 import Grid from "@material-ui/core/Grid";
-import { friendsList } from "./api/friends";
-import { parksAndRecList } from "./api/parks-and-rec";
-import { psychList } from "./api/psych";
-import { communityList } from "./api/community";
 import ReactGA from "react-ga";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -25,14 +21,6 @@ const filterEpisodeList = (episodes, switchState) => {
   return episodes.filter(episode => {
     return episode.holidays.some(holiday => switchState[holiday]);
   });
-};
-
-const showLists = {
-  theOffice: theOfficeList,
-  friends: friendsList,
-  parksAndRec: parksAndRecList,
-  community: communityList,
-  psych: psychList
 };
 
 const initialSwitchState = {
@@ -52,7 +40,7 @@ const getEpisodesFromShowState = showState => {
   let episodeList = [];
   for (const show in showState) {
     if (showState[show]) {
-      episodeList = episodeList.concat(showLists[show]);
+      episodeList = episodeList.concat(showListPaths[show]);
     }
   }
 
