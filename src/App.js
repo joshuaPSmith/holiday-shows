@@ -1,36 +1,37 @@
-import React, { useEffect } from 'react';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
-import { theOfficeList } from './api/the-office';
-import ShowList from './ShowList';
-import { holidays } from './api/holidays';
-import HolidaySwitches from './HolidaySwitches';
-import { Multiselect } from 'multiselect-react-dropdown';
-import { showList } from './api/show-list';
-import logo from './assets/img/logo-wide.png';
-import './css/main.css';
-import Grid from '@material-ui/core/Grid';
-import { friendsList } from './api/friends';
-import { parksAndRecList } from './api/parks-and-rec';
-import { psychList } from './api/psych';
-import { communityList } from './api/community';
-import ReactGA from 'react-ga';
-import {Helmet} from 'react-helmet'
-import AppsIcon from '@material-ui/icons/Apps';
+import React, { useEffect } from "react";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Link from "@material-ui/core/Link";
+import { theOfficeList } from "./api/the-office";
+import ShowList from "./ShowList";
+import { holidays } from "./api/holidays";
+import HolidaySwitches from "./HolidaySwitches";
+import { Multiselect } from "multiselect-react-dropdown";
+import { showList } from "./api/show-list";
+import logo from "./assets/img/logo-wide.png";
+import fbImage from "./assets/img/fb-pic.jpg";
+import "./css/main.css";
+import Grid from "@material-ui/core/Grid";
+import { friendsList } from "./api/friends";
+import { parksAndRecList } from "./api/parks-and-rec";
+import { psychList } from "./api/psych";
+import { communityList } from "./api/community";
+import ReactGA from "react-ga";
+import { Helmet } from "react-helmet";
+import AppsIcon from "@material-ui/icons/Apps";
 // import ViewListIcon from '@material-ui/icons/ViewList';
 // import IconButton from '@material-ui/core/IconButton';
-import noResultsFoundImg from './assets/img/NoResultsLiteStatic.png'
+import noResultsFoundImg from "./assets/img/NoResultsLiteStatic.png";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="https://www.holidayshowfinder.com">
-      Holiday Show Finder
-      </Link>{' '}
+        Holiday Show Finder
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -38,9 +39,13 @@ function Copyright() {
 function Suggestions() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Suggestions: '}
-      <Link target="_blank" color="inherit" href="mailto:holidayshowfinder@gmail.com">
-      holidayshowfinder@gmail.com
+      {"Suggestions: "}
+      <Link
+        target="_blank"
+        color="inherit"
+        href="mailto:holidayshowfinder@gmail.com"
+      >
+        holidayshowfinder@gmail.com
       </Link>
     </Typography>
   );
@@ -48,9 +53,9 @@ function Suggestions() {
 
 const filterEpisodeList = (episodes, switchState) => {
   return episodes.filter(episode => {
-    return episode.holidays.some(holiday => switchState[holiday])
-  })
-}
+    return episode.holidays.some(holiday => switchState[holiday]);
+  });
+};
 
 const showLists = {
   theOffice: theOfficeList,
@@ -66,15 +71,15 @@ const initialSwitchState = {
   halloween: false,
   thanksgiving: false,
   valentinesDay: false,
-  stPatricksDay: false,
+  stPatricksDay: false
 };
 
 const initialShowState = Object.keys(showList).reduce((acc, curr) => {
-  acc[curr] = curr === 'theOffice' ? true : false; // default to the office for now
+  acc[curr] = curr === "theOffice" ? true : false; // default to the office for now
   return acc;
 }, {});
 
-const getEpisodesFromShowState = (showState) => {
+const getEpisodesFromShowState = showState => {
   let episodeList = [];
   for (const show in showState) {
     if (showState[show]) {
@@ -83,17 +88,15 @@ const getEpisodesFromShowState = (showState) => {
   }
 
   return episodeList;
-}
+};
 const initialEpisodeState = theOfficeList;
-const initialShowLayoutState = 'grid';
+const initialShowLayoutState = "grid";
 
 export default function App() {
-
   useEffect(() => {
-    ReactGA.initialize('UA-153509644-1');
-    ReactGA.pageview('/homepage');
+    ReactGA.initialize("UA-153509644-1");
+    ReactGA.pageview("/homepage");
   }, []);
-
 
   const [state, setState] = React.useState({
     switchState: initialSwitchState,
@@ -105,53 +108,53 @@ export default function App() {
 
   const handleSwitchChange = (checkedValue, name) => {
     // Filter the episode list based on the change
-    const newSwitchState = { ...state.switchState, [name]: checkedValue }
+    const newSwitchState = { ...state.switchState, [name]: checkedValue };
     setState({
       ...state,
       switchState: newSwitchState,
       episodes: state.fullEpisodeList.filter(episode => {
-        return episode.holidays.some(holiday => newSwitchState[holiday])
+        return episode.holidays.some(holiday => newSwitchState[holiday]);
       })
     });
 
     ReactGA.event({
-      category: 'User',
-      action: 'Switched Holiday',
+      category: "User",
+      action: "Switched Holiday",
       label: name
     });
   };
 
-  const handleLayoutChange = (layout) => {
-    console.log('handle layout change');
+  const handleLayoutChange = layout => {
+    console.log("handle layout change");
     const layoutState = layout;
     setState({
       ...state,
       showLayoutState: layoutState
     });
-  }
+  };
 
   const onSelectChange = (optionsList, selectedItem) => {
-    const newShowState = { ...state.showState, [selectedItem.id]: true }
+    const newShowState = { ...state.showState, [selectedItem.id]: true };
     setShowState(newShowState);
     ReactGA.event({
-      category: 'User',
-      action: 'Added Show',
+      category: "User",
+      action: "Added Show",
       label: selectedItem.name,
       value: optionsList
     });
   };
   const onShowRemoved = (optionsList, selectedItem) => {
-    const newShowState = { ...state.showState, [selectedItem.id]: false }
+    const newShowState = { ...state.showState, [selectedItem.id]: false };
     setShowState(newShowState);
     ReactGA.event({
-      category: 'User',
-      action: 'Removed Show',
+      category: "User",
+      action: "Removed Show",
       label: selectedItem.name,
       value: optionsList
     });
   };
 
-  const setShowState = (newShowState) => {
+  const setShowState = newShowState => {
     const newShowList = getEpisodesFromShowState(newShowState);
     setState({
       ...state,
@@ -159,7 +162,7 @@ export default function App() {
       episodes: filterEpisodeList(newShowList, state.switchState),
       fullEpisodeList: newShowList
     });
-  }
+  };
 
   const listResults = (episodes, showLayoutState) => {
     if (episodes.length > 0) {
@@ -167,32 +170,37 @@ export default function App() {
         <ShowList
           className="showListClass"
           episodes={episodes}
-          layout={showLayoutState} />
-      )
+          layout={showLayoutState}
+        />
+      );
     } else {
       return (
         <div className="noResultsFound">
           <img src={noResultsFoundImg} alt="No Results Found" />
           <div className="noResultsTitle">No results found.</div>
-          <div className="noResultsSubtitle">Try selecting a holiday or adding a show.</div>
+          <div className="noResultsSubtitle">
+            Try selecting a holiday or adding a show.
+          </div>
         </div>
       );
     }
-  }
+  };
 
-  const dataSource = Object.keys(showList).map(key => { return { id: key, name: showList[key].name } })
+  const dataSource = Object.keys(showList).map(key => {
+    return { id: key, name: showList[key].name };
+  });
 
   const customStyle = {
     chips: {
       background: "#F6F6F6",
-      "borderRadius": "10px",
-      "fontSize": "14px",
+      borderRadius: "10px",
+      fontSize: "14px",
       color: "black"
     },
     searchBox: {
       border: "none",
-      "borderRadius": "10px",
-      "backgroundColor": "#F6F6F6",
+      borderRadius: "10px",
+      backgroundColor: "#F6F6F6",
       padding: "14px"
     }
   };
@@ -200,12 +208,24 @@ export default function App() {
   return (
     <Container>
       <div>
-      <Helmet>
-    <title>Holiday Show Finder - The easiest way to find holiday episodes of your favorite shows!</title>
-    <meta name="description" content="Use our app to find holiday episodes of The Office, Friends, 
+        <Helmet>
+          <title>
+            Holiday Show Finder - The easiest way to find holiday episodes of
+            your favorite shows!
+          </title>
+          <meta
+            name="description"
+            content="Use our app to find holiday episodes of The Office, Friends, 
     Psych, Community, and Parks and recreation! This app will make it easy to get in the holiday season 
-    by showing you the right episodes for the holiday!" />
-  </Helmet>
+    by showing you the right episodes for the holiday!"
+          />
+          <meta
+            property="og:title"
+            content="Holiday Show Finder! Use our app to find holiday episodes of The Office, Friends, 
+  Psych, Community, and Parks and Recreation!"
+          />
+          <meta property="og:image" content={fbImage} />
+        </Helmet>
       </div>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
@@ -230,12 +250,15 @@ export default function App() {
           <hr className="headerSeparator"></hr>
         </Grid>
         <Grid item xs={12} md={3}>
-          <Typography variant="h6" className="titleClass">FILTER</Typography>
+          <Typography variant="h6" className="titleClass">
+            FILTER
+          </Typography>
           <div className="holidaySwitches">
             <HolidaySwitches
               switchChange={handleSwitchChange}
               switchState={state.switchState}
-              holidays={holidays} />
+              holidays={holidays}
+            />
           </div>
           {/* <Typography variant="h6" className="titleClass">SORT</Typography> */}
         </Grid>
@@ -252,7 +275,7 @@ export default function App() {
         </Grid>
       </Grid>
       <Copyright />
-      <Suggestions/>
+      <Suggestions />
     </Container>
   );
 }
